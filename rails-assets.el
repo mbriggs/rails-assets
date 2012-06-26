@@ -34,7 +34,7 @@
 
 ;;; helpers
 
-(defvar ra/js-suffix  "js|coffee")
+(defvar ra/js-suffix  "js\\|coffee")
 (defvar ra/stylesheet-suffix  "css\\|sass\\|scss")
 
 (defun ra/suffix (type)
@@ -53,7 +53,7 @@
   (mapcar 'car (ra/js-files)))
 
 (defun ra/stylesheet-names ()
-  (mapcar 'car (ra/stylehseet-files)))
+  (mapcar 'car (ra/stylesheet-files)))
 
 (defun ra/js-files ()
   (or ra/js-alist
@@ -67,10 +67,10 @@
 (defvar ra/stylesheet-alist nil)
 
 (defun ra/read-js ()
-  (all-files-under-dir-recursively (ra/asset-dir "javascripts") (ra/suffix 'js)))
+  (all-files-under-dir-recursively (ra/asset-dir "javascripts")))
 
 (defun ra/read-stylesheets ()
-  (all-files-under-dir-recursively (ra/asset-dir "stylesheets") (ra/suffix 'stylesheet)))
+  (all-files-under-dir-recursively (ra/asset-dir "stylesheets")))
 
 ;;; parsing
 
@@ -78,6 +78,6 @@
   `(,(ra/name-from file-name) . ,file-name))
 
 (defun ra/name-from (file-name)
-  (let* ((no-js (replace-regexp-in-string (ra/suffix js) "" file-name))
-         (no-suffix (replace-regexp-in-string (ra/suffix stylesheet) "" no-js)))
-    (replace-regexp-in-string (ra/asset-dir "(javascripts|stylesheets)" "" no-suffix))))
+  (let* ((no-js (replace-regexp-in-string ".\\(js\\|coffee\\)$" "" file-name))
+         (no-suffix (replace-regexp-in-string ".\\(css\\|css.scss\\|css.sass\\)$" "" no-js)))
+    (replace-regexp-in-string (ra/asset-dir "\\(javascripts\\|stylesheets\\)/") "" no-suffix)))
