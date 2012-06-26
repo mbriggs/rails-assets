@@ -81,3 +81,6 @@
   (let* ((no-js (replace-regexp-in-string ".\\(js\\|coffee\\)$" "" file-name))
          (no-suffix (replace-regexp-in-string ".\\(css\\|css.scss\\|css.sass\\)$" "" no-js)))
     (replace-regexp-in-string (ra/asset-dir "\\(javascripts\\|stylesheets\\)/") "" no-suffix)))
+
+
+(provide 'rails-assets)
