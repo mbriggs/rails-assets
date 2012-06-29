@@ -19,17 +19,17 @@
 (defun ra/find-javascript ()
   (interactive)
   (let ((js (ido-completing-read "Javascript: " (ra/js-names))))
-    (find-file (ra/find-path js))))
+    (find-file (ra/find-path js (ra/js-files)))))
 
 (defun ra/find-stylesheet ()
   (interactive)
   (let ((stylesheet (ido-completing-read "Stylesheet: " (ra/stylesheet-names))))
-    (find-file (ra/find-path stylesheet))))
+    (find-file (ra/find-path stylesheet (ra/stylesheet-files)))))
 
 (defun ra/clear-caches ()
   (interactive)
   (setq ra/js-alist nil)
-  (setq ra/stylehseet-alist nil))
+  (setq ra/stylesheet-alist nil))
 
 
 ;;; helpers
@@ -60,7 +60,7 @@
       (setq ra/js-alist (mapcar 'ra/name-and-path (ra/read-js)))))
 
 (defun ra/stylesheet-files ()
-  (or ra/stylehseet-alist
+  (or ra/stylesheet-alist
       (setq ra/js-alist (mapcar 'ra/name-and-path (ra/read-stylesheets)))))
 
 (defvar ra/js-alist nil)
