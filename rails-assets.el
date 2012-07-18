@@ -61,16 +61,16 @@
 
 (defun ra/stylesheet-files ()
   (or ra/stylesheet-alist
-      (setq ra/js-alist (mapcar 'ra/name-and-path (ra/read-stylesheets)))))
+      (setq ra/stylesheet-alist (mapcar 'ra/name-and-path (ra/read-stylesheets)))))
 
 (defvar ra/js-alist nil)
 (defvar ra/stylesheet-alist nil)
 
 (defun ra/read-js ()
-  (all-files-under-dir-recursively (ra/asset-dir "javascripts")))
+  (all-files-under-dir-recursively (ra/asset-dir "javascripts") "\\(js\\|coffee\\)"))
 
 (defun ra/read-stylesheets ()
-  (all-files-under-dir-recursively (ra/asset-dir "stylesheets")))
+  (all-files-under-dir-recursively (ra/asset-dir "stylesheets") "\\(sass\\|scss\\|css\\)$"))
 
 ;;; parsing
 
